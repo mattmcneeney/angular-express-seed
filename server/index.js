@@ -13,11 +13,11 @@ app.use(bodyParser.urlencoded({
    extended: true
 }));
 
-/* Routing - Static client files */
-app.use(express.static(path.join(__dirname, '../client')));
-
 /* Routing - API */
 app.use('/api', router);
+
+/* Routing - Static client files */
+app.use(express.static(path.join(__dirname, '../client')));
 
 /* Start the server */
 app.listen(config.port, function() {
