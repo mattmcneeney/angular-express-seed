@@ -17,7 +17,15 @@ app.use(bodyParser.urlencoded({
 app.use('/api', router);
 
 /* Routing - Static client files */
-app.use(express.static(path.join(__dirname, '../client')));
+app.use('/js', express.static(path.join(__dirname, '../client/js')));
+app.use('/images', express.static(path.join(__dirname, '../client/images')));
+app.use('/css', express.static(path.join(__dirname, '../client/css')));
+app.use('/views', express.static(path.join(__dirname, '../client/views')));
+
+/* Routing - Always serve index.html since we're using AngularJS */
+app.all('/*', function(request, response) {
+   response.sendFile('index.html', { root: path.join(__dirname, '../client') });
+});
 
 /* Start the server */
 app.listen(config.port, function() {
